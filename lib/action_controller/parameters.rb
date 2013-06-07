@@ -179,8 +179,6 @@ module ActionController
 
         # Slicing filters out non-declared keys.
         slice(*filter.keys).each do |key, value|
-          return unless value
-
           if filter[key] == []
             # Declaration {:comment_ids => []}.
             array_of_permitted_scalars_filter(params, key)

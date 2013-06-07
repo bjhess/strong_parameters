@@ -252,6 +252,16 @@ class NestedParametersTest < ActiveSupport::TestCase
     assert_nil permitted[:book][:genre]
   end
 
+  test "nil param value that should be a hash" do
+    params = ActionController::Parameters.new({
+      :book => nil
+    })
+    permitted = params.permit :book => { :genre => :type }
+
+    assert permitted.has_key?(:book)
+    assert_nil permitted[:book]
+  end
+
   test "fields_for_style_nested_params" do
     params = ActionController::Parameters.new({
       :book => {
